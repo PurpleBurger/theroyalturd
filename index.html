@@ -1,12 +1,105 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Board</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: 60% 40%;
+            grid-template-rows: repeat(3, 1fr);
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .left-column {
+            display: grid;
+            grid-template-rows: 33% 33% 33%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-column .row1 {
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
+
+        .left-column .row3 {
+            display: grid;
+            grid-template-columns: 75% 25%;
+        }
+
+        .right-column {
+            display: grid;
+            grid-template-rows: 75% 25%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Change background color if needed */
+            border: 1px solid #ccc; /* Optional border for visualization */
+        }
+
+        @media (max-width: 768px) {
+            .board {
+                grid-template-columns: 100%;
+                grid-template-rows: repeat(6, 1fr);
+            }
+            .left-column, .right-column {
+                grid-template-rows: 50% 50%;
+            }
+        }
+    </style>
+</head>
 <body>
+    <div class="board">
+        <div class="left-column">
+            <div class="row1 section" id="left1"></div>
+            <div class="section" id="left2"></div>
+            <div class="row3 section" id="left3"></div>
+        </div>
+        <div class="right-column">
+            <div class="section" id="right1"></div>
+            <div class="section" id="right2"></div>
+        </div>
+    </div>
 
-  <h2>The Royal Turd</h2>
-  <h4>Hudson & Parrain</h4>
-  <marquee width="60%" direction="left" height="100px">
-Hudson Leslie Mize and Parrain Budsy Jolly
-</marquee>
+    <script>
+        const left1Contents = ['https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049', 'https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049', 'https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049'];
+        const left2Contents = ['Text 1', 'Text 2', 'Text 3'];
+        const left3Contents = ['content4.gif', 'content5.gif', 'content6.gif'];
+        const right1Contents = ['content7.gif', 'content8.gif'];
+        const right2Contents = ['content9.gif', 'content10.gif'];
 
-  
+        function changeContent(id, contents, interval) {
+            let index = 0;
+            const element = document.getElementById(id);
+            setInterval(() => {
+                element.innerHTML = `<img src="${contents[index]}" alt="Content" style="max-width: 100%; max-height: 100%;"/>`;
+                index = (index + 1) % contents.length;
+            }, interval);
+        }
+
+        changeContent('left1', left1Contents, 3000);
+        changeContent('left2', left2Contents.map(text => `<div>${text}</div>`), 5000);
+        changeContent('left3', left3Contents, 4000);
+        changeContent('right1', right1Contents, 6000);
+        changeContent('right2', right2Contents, 7000);
+    </script>
 </body>
 </html>
