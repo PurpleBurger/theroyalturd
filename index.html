@@ -27,17 +27,14 @@
             flex-direction: column;
         }
 
-        .big-left {
-            border-right: 1px solid #ccc; /* Optional border */
-        }
-
         .big-left-row {
             display: flex;
-            height: 360px;
+            height: 324px; /* 360px - 10% */
+            margin: 0; /* No margin */
         }
 
         .big-left-row1 {
-            flex: 0 0 360px;
+            flex: 0 0 324px; /* 360px - 10% */
         }
 
         .big-left-row1 .cell1,
@@ -48,40 +45,41 @@
         .big-right-top,
         .big-right-bottom {
             background-color: #f0f0f0; /* Background color */
-            border: 1px solid #ccc; /* Optional border */
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 0; /* No margin */
+            padding: 0; /* No padding */
         }
 
         .big-left-row1 .cell1 {
-            width: 240px;
-            height: 360px;
+            width: 216px; /* 240px - 10% */
+            height: 324px; /* 360px - 10% */
         }
 
         .big-left-row1 .cell2 {
-            width: 720px;
-            height: 360px;
+            width: 648px; /* 720px - 10% */
+            height: 324px; /* 360px - 10% */
         }
 
         .big-left-row2 {
-            flex: 0 0 360px;
-            height: 360px;
+            flex: 0 0 324px; /* 360px - 10% */
+            height: 324px; /* 360px - 10% */
         }
 
         .big-left-row3 {
             display: flex;
-            height: 360px;
+            height: 324px; /* 360px - 10% */
         }
 
         .big-left-row3 .cellLeft {
-            width: 720px;
-            height: 360px;
+            width: 648px; /* 720px - 10% */
+            height: 324px; /* 360px - 10% */
         }
 
         .big-left-row3 .cellRight {
-            width: 240px;
-            height: 360px;
+            width: 216px; /* 240px - 10% */
+            height: 324px; /* 360px - 10% */
         }
 
         .big-right {
@@ -90,13 +88,13 @@
         }
 
         .big-right-top {
-            flex: 0 0 810px;
-            height: 810px;
+            flex: 0 0 729px; /* 810px - 10% */
+            height: 729px; /* 810px - 10% */
         }
 
         .big-right-bottom {
-            flex: 0 0 270px;
-            height: 270px;
+            flex: 0 0 243px; /* 270px - 10% */
+            height: 243px; /* 270px - 10% */
         }
     </style>
 </head>
@@ -120,40 +118,30 @@
     </div>
 
     <script>
-        const left1URL = 'https://github.com/PurpleBurger/theroyalturd/tree/main/BIGLEFTROW1_CELL1'; // Replace with your URL
-        const left2URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW1_CELL2/'; // Replace with your URL
-        const left3URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW2/'; // Replace with your URL
-        const left4URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW3_CELLLEFT/'; // Replace with your URL
-        const left5URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW3_CELLRIGHT/'; // Replace with your URL
-        const right1URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGRIGHT_TOPROW/'; // Replace with your URL
-        const right2URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGRIGHT_BOTTOMROW/'; // Replace with your URL
+        const left1URLs = ['https://github.com/PurpleBurger/theroyalturd/blob/main/BIGLEFTROW1_CELL1/me.png?raw=true', 'URL2', 'URL3']; // Replace with actual URLs
+        const left2URLs = ['URL1', 'URL2', 'URL3']; // Replace with actual URLs
+        const left3URLs = ['URL1', 'URL2', 'URL3']; // Replace with actual URLs
+        const left4URLs = ['URL1', 'URL2', 'URL3']; // Replace with actual URLs
+        const left5URLs = ['URL1', 'URL2', 'URL3']; // Replace with actual URLs
+        const right1URLs = ['URL1', 'URL2', 'URL3']; // Replace with actual URLs
+        const right2URLs = ['URL1', 'URL2', 'URL3']; // Replace with actual URLs
 
-        async function fetchFiles(folderURL) {
-            const response = await fetch(folderURL);
-            return response.json(); // Assuming the folder URL returns a list of files
-        }
-
-        function changeContent(id, folderURL, interval) {
+        function changeContent(id, urls, interval) {
             const element = document.getElementById(id);
-            setInterval(async () => {
-                const files = await fetchFiles(folderURL);
-                if (files.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * files.length);
-                    const file = files[randomIndex];
-                    element.innerHTML = `<img src="${folderURL}${file}" alt="Content" style="max-width: 100%; max-height: 100%;"/>`;
-                } else {
-                    element.innerHTML = ''; // Keep it empty if no contents
-                }
+            setInterval(() => {
+                const randomIndex = Math.floor(Math.random() * urls.length);
+                const url = urls[randomIndex];
+                element.innerHTML = `<img src="${url}" alt="Content" style="max-width: 100%; max-height: 100%; margin: 0; padding: 0;"/>`;
             }, interval);
         }
 
-        changeContent('BigLeftRow1_Cell1', left1URL, 10000);
-        changeContent('BigLeftRow1_Cell2', left2URL, 25000);
-        changeContent('BigLeftRow2', left3URL, 50000);
-        changeContent('BigLeftRow3_CellLeft', left4URL, 30000);
-        changeContent('BigLeftRow3_CellRight', left5URL, 45000);
-        changeContent('BigRight_TopRow', right1URL, 60000);
-        changeContent('BigRight_BottomRow', right2URL, 90000);
+        changeContent('BigLeftRow1_Cell1', left1URLs, 10000);
+        changeContent('BigLeftRow1_Cell2', left2URLs, 25000);
+        changeContent('BigLeftRow2', left3URLs, 50000);
+        changeContent('BigLeftRow3_CellLeft', left4URLs, 30000);
+        changeContent('BigLeftRow3_CellRight', left5URLs, 45000);
+        changeContent('BigRight_TopRow', right1URLs, 60000);
+        changeContent('BigRight_BottomRow', right2URLs, 90000);
     </script>
 </body>
 </html>
