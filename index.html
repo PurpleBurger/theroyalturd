@@ -9,104 +9,151 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-        }
-
-        .board {
-            display: grid;
-            grid-template-columns: 60% 40%;
-            grid-template-rows: repeat(3, 1fr);
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .section {
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .board {
+            display: flex;
+            width: 1920px; /* 960px + 960px */
+            height: 1080px; /* Set height */
+        }
+
+        .big-left, .big-right {
+            width: 960px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .big-left {
+            border-right: 1px solid #ccc; /* Optional border */
+        }
+
+        .big-left-row {
+            display: flex;
+            height: 360px;
+        }
+
+        .big-left-row1 {
+            flex: 0 0 360px;
+        }
+
+        .big-left-row1 .cell1,
+        .big-left-row1 .cell2,
+        .big-left-row2,
+        .big-left-row3 .cellLeft,
+        .big-left-row3 .cellRight,
+        .big-right-top,
+        .big-right-bottom {
             background-color: #f0f0f0; /* Background color */
-            border: 1px solid #ccc; /* Optional border for visualization */
-            height: 100%; /* Ensure section takes full height */
-            min-height: 0; /* Allow it to shrink to zero */
+            border: 1px solid #ccc; /* Optional border */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .left-column {
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr; /* 3 equal rows */
-            height: 100%;
+        .big-left-row1 .cell1 {
+            width: 240px;
+            height: 360px;
         }
 
-        .left-column .row1 {
-            display: grid;
-            grid-template-columns: 25% 75%; /* Split into two cells */
-            height: 100%;
+        .big-left-row1 .cell2 {
+            width: 720px;
+            height: 360px;
         }
 
-        .left-column .row3 {
-            display: grid;
-            grid-template-columns: 75% 25%; /* Split into two cells */
-            height: 100%;
+        .big-left-row2 {
+            flex: 0 0 360px;
+            height: 360px;
         }
 
-        .right-column {
-            display: grid;
-            grid-template-rows: 3fr 1fr; /* 75% and 25% */
-            height: 100%;
+        .big-left-row3 {
+            display: flex;
+            height: 360px;
         }
 
-        @media (max-width: 768px) {
-            .board {
-                grid-template-columns: 100%;
-                grid-template-rows: repeat(6, 1fr);
-            }
-            .left-column, .right-column {
-                grid-template-rows: 50% 50%;
-            }
+        .big-left-row3 .cellLeft {
+            width: 720px;
+            height: 360px;
+        }
+
+        .big-left-row3 .cellRight {
+            width: 240px;
+            height: 360px;
+        }
+
+        .big-right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .big-right-top {
+            flex: 0 0 810px;
+            height: 810px;
+        }
+
+        .big-right-bottom {
+            flex: 0 0 270px;
+            height: 270px;
         }
     </style>
 </head>
 <body>
     <div class="board">
-        <div class="left-column">
-            <div class="row1 section" id="left1"></div>
-            <div class="section" id="left2"></div>
-            <div class="row3 section" id="left3"></div>
+        <div class="big-left">
+            <div class="big-left-row">
+                <div class="cell1" id="BigLeftRow1_Cell1"></div>
+                <div class="cell2" id="BigLeftRow1_Cell2"></div>
+            </div>
+            <div class="big-left-row2" id="BigLeftRow2"></div>
+            <div class="big-left-row3">
+                <div class="cellLeft" id="BigLeftRow3_CellLeft"></div>
+                <div class="cellRight" id="BigLeftRow3_CellRight"></div>
+            </div>
         </div>
-        <div class="right-column">
-            <div class="section" id="right1"></div>
-            <div class="section" id="right2"></div>
+        <div class="big-right">
+            <div class="big-right-top" id="BigRight_TopRow"></div>
+            <div class="big-right-bottom" id="BigRight_BottomRow"></div>
         </div>
     </div>
 
     <script>
-        const left1Contents = ['https://sfmservices.com/wp-content/uploads/2021/03/miami-orange-bowl-sized-1080x675.jpg', 'content2.gif', 'content3.gif'];
-        const left2Contents = ['https://sfmservices.com/wp-content/uploads/2021/03/miami-orange-bowl-sized-1080x675.jpg', 'Text 2', 'Text 3'];
-        const left3Contents = ['https://sfmservices.com/wp-content/uploads/2021/03/miami-orange-bowl-sized-1080x675.jpg', 'https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8bd75ef4-f74a-4f15-b5c6-3a38e7d0971e_777x436.jpeg', 'https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8bd75ef4-f74a-4f15-b5c6-3a38e7d0971e_777x436.jpeg'];
-        const right1Contents = ['https://sfmservices.com/wp-content/uploads/2021/03/miami-orange-bowl-sized-1080x675.jpg', 'https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049'];
-        const right2Contents = ['https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8bd75ef4-f74a-4f15-b5c6-3a38e7d0971e_777x436.jpeg', 'https://sfmservices.com/wp-content/uploads/2021/03/miami-orange-bowl-sized-1080x675.jpg'];
+        const left1URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW1_CELL1/'; // Replace with your URL
+        const left2URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW1_CELL2/'; // Replace with your URL
+        const left3URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW2/'; // Replace with your URL
+        const left4URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW3_CELLLEFT/'; // Replace with your URL
+        const left5URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGLEFTROW3_CELLRIGHT/'; // Replace with your URL
+        const right1URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGRIGHT_TOPROW/'; // Replace with your URL
+        const right2URL = 'YOUR_GITHUB_FOLDER_URL_FOR_BIGRIGHT_BOTTOMROW/'; // Replace with your URL
 
-        function changeContent(id, contents, interval) {
-            let index = 0;
+        async function fetchFiles(folderURL) {
+            const response = await fetch(folderURL);
+            return response.json(); // Assuming the folder URL returns a list of files
+        }
+
+        function changeContent(id, folderURL, interval) {
             const element = document.getElementById(id);
-            setInterval(() => {
-                if (contents.length > 0) {
-                    if (typeof contents[index] === 'string') {
-                        element.innerHTML = `<img src="${contents[index]}" alt="Content" style="max-width: 100%; max-height: 100%;"/>`;
-                    } else {
-                        element.innerHTML = contents[index];
-                    }
-                    index = (index + 1) % contents.length;
+            setInterval(async () => {
+                const files = await fetchFiles(folderURL);
+                if (files.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * files.length);
+                    const file = files[randomIndex];
+                    element.innerHTML = `<img src="${folderURL}${file}" alt="Content" style="max-width: 100%; max-height: 100%;"/>`;
                 } else {
                     element.innerHTML = ''; // Keep it empty if no contents
                 }
             }, interval);
         }
 
-        changeContent('left1', left1Contents, 3000);
-        changeContent('left2', left2Contents.map(text => `<div>${text}</div>`), 5000);
-        changeContent('left3', left3Contents, 4000);
-        changeContent('right1', right1Contents, 6000);
-        changeContent('right2', right2Contents, 7000);
+        changeContent('BigLeftRow1_Cell1', left1URL, 10000);
+        changeContent('BigLeftRow1_Cell2', left2URL, 25000);
+        changeContent('BigLeftRow2', left3URL, 50000);
+        changeContent('BigLeftRow3_CellLeft', left4URL, 30000);
+        changeContent('BigLeftRow3_CellRight', left5URL, 45000);
+        changeContent('BigRight_TopRow', right1URL, 60000);
+        changeContent('BigRight_BottomRow', right2URL, 90000);
     </script>
 </body>
 </html>
