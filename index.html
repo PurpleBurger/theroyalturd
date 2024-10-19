@@ -10,9 +10,6 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .board {
@@ -25,25 +22,25 @@
 
         .left-column {
             display: grid;
-            grid-template-rows: 33% 33% 33%;
-            width: 100%;
+            grid-template-rows: 1fr 1fr 1fr; /* 3 equal rows */
             height: 100%;
         }
 
         .left-column .row1 {
             display: grid;
-            grid-template-columns: 25% 75%;
+            grid-template-columns: 25% 75%; /* Split into two cells */
+            height: 100%;
         }
 
         .left-column .row3 {
             display: grid;
-            grid-template-columns: 75% 25%;
+            grid-template-columns: 75% 25%; /* Split into two cells */
+            height: 100%;
         }
 
         .right-column {
             display: grid;
-            grid-template-rows: 75% 25%;
-            width: 100%;
+            grid-template-rows: 3fr 1fr; /* 75% and 25% */
             height: 100%;
         }
 
@@ -51,7 +48,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0; /* Change background color if needed */
+            background-color: #f0f0f0; /* Background color */
             border: 1px solid #ccc; /* Optional border for visualization */
         }
 
@@ -80,7 +77,7 @@
     </div>
 
     <script>
-        const left1Contents = ['https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049', 'https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049', 'https://mokisworldhub.com/cdn/shop/files/49c272c5-adc5-4760-add5-7a509f4b2773_banner_en_us_Banner6USVERDE_1600x1600_crop_center.jpg?v=1677603049'];
+        const left1Contents = ['content1.gif', 'content2.gif', 'content3.gif'];
         const left2Contents = ['Text 1', 'Text 2', 'Text 3'];
         const left3Contents = ['content4.gif', 'content5.gif', 'content6.gif'];
         const right1Contents = ['content7.gif', 'content8.gif'];
@@ -90,7 +87,11 @@
             let index = 0;
             const element = document.getElementById(id);
             setInterval(() => {
-                element.innerHTML = `<img src="${contents[index]}" alt="Content" style="max-width: 100%; max-height: 100%;"/>`;
+                if (typeof contents[index] === 'string') {
+                    element.innerHTML = `<img src="${contents[index]}" alt="Content" style="max-width: 100%; max-height: 100%;"/>`;
+                } else {
+                    element.innerHTML = contents[index];
+                }
                 index = (index + 1) % contents.length;
             }, interval);
         }
